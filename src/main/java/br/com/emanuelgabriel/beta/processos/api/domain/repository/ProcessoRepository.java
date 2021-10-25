@@ -9,8 +9,8 @@ import br.com.emanuelgabriel.beta.processos.api.domain.entity.Processo;
 @Repository
 public interface ProcessoRepository extends JpaRepository<Processo, Long> {
 
-	@Query(value = "SELECT next value for seq_nu_protocolo", nativeQuery = true)
+	@Query(value = "SELECT NEXT VALUE FOR TB_PROCESSO.seq_nu_protocolo", nativeQuery = true)
 	Long gerarNumeroDoProtocolo();
-	
+
 
 }

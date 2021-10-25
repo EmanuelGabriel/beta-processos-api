@@ -46,6 +46,9 @@ public class Processo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_nu_protocolo")
 	@Column(name = "nu_protocolo")
 	private Long protocolo;
+	
+	@Column(name = "numero_protocolo")
+	private String numeroProtocolo;
 
 	@Column(name = "dt_inicioprocesso")
 	@CreationTimestamp
@@ -59,10 +62,14 @@ public class Processo implements Serializable {
 	private LocalDateTime prazoEstimado;
 
 	@ManyToOne
-	@JoinColumn(name = "fk_tiposolicitacao", insertable = false, updatable = false)
+	@JoinColumn(name = "fk_tiposolicitacao")
 	private TipoSolicitacao tipoSolicitacao;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "processo", orphanRemoval = true)
 	private List<AnexoProcesso> anexosProcesso;
+	
+	public String gerarNumeroDoProtocolo() {
+		return String.valueOf(getId()).concat(String.valueOf(getInicioProcesso().getYear())); // ex: 9992021
+	}
 
 }

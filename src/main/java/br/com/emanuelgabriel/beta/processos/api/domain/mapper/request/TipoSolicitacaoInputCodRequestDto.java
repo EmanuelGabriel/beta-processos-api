@@ -1,6 +1,6 @@
 package br.com.emanuelgabriel.beta.processos.api.domain.mapper.request;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProcessoRequestDto {
+public class TipoSolicitacaoInputCodRequestDto {
 
-	@NotNull(message = "Campo tipo solicitação não pode ser nulo ou vazio")
-	private TipoSolicitacaoInputCodRequestDto tipoSolicitacao;
+	@NotBlank(message = "Id não pode ser vazio")
+	private Long id;
 
 }

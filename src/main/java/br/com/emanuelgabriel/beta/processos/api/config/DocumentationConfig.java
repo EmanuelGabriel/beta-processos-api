@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 @OpenAPIDefinition(
 		info = @Info(description = "Documentação do Beta Processos API", 
 		termsOfService = "Termos de uso", 
-		title = "API Beta Processos Ltda", 
+		title = "API REST Beta Processos Ltda", 
 		version = "1.0.0", 
 		contact = @Contact(name = "Emanuel Gabriel Sousa", 
 		email = "emanuel.gabriel.sousa@hotmail.com")))
