@@ -1,8 +1,6 @@
 package br.com.emanuelgabriel.beta.processos.api.services;
 
 
-import static java.util.Objects.isNull;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

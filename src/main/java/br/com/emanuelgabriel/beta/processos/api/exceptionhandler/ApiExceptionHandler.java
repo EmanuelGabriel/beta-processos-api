@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import br.com.emanuelgabriel.beta.processos.api.exceptionhandler.Problema.Campo;
 import br.com.emanuelgabriel.beta.processos.api.services.exceptions.ProcessoNaoEncontradoException;
 import br.com.emanuelgabriel.beta.processos.api.services.exceptions.RegraNegocioException;
+import br.com.emanuelgabriel.beta.processos.api.services.exceptions.TipoContatoNaoEncontradoException;
 import br.com.emanuelgabriel.beta.processos.api.services.exceptions.TipoSolicitacaoNaoEncontradoException;
 
 /**
@@ -79,6 +80,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(ProcessoNaoEncontradoException.class)
 	public ResponseEntity<?> processoNaoEncontradoException(ProcessoNaoEncontradoException ex, WebRequest request) {
+
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
+		String detalhe = ex.getMessage();
+
+		ProblemaResponse problema = criarProblemaBuilder(status, tipoProblema, detalhe).mensagem(detalhe).build();
+
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+	}
+	
+	@ExceptionHandler(TipoContatoNaoEncontradoException.class)
+	public ResponseEntity<?> tipoContatoNaoEncontradoException(TipoContatoNaoEncontradoException ex, WebRequest request) {
 
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
