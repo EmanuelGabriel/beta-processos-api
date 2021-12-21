@@ -65,8 +65,7 @@ public class ProcessoService {
 	
 	public List<ProcessoResponseDto> buscarTodos() {
 		log.info("Buscar todos os processos");
-		var processos = processoRepository.findAll();
-		return mapper.paraLista(processos, ProcessoResponseDto.class);
+		return mapper.paraLista(processoRepository.findAll(), ProcessoResponseDto.class);
 	}
 
 }
