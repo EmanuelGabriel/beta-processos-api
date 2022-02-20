@@ -1,9 +1,7 @@
 package br.com.emanuelgabriel.beta.processos.api.exceptionhandler;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
+import br.com.emanuelgabriel.beta.processos.api.exceptionhandler.Problema.Campo;
+import br.com.emanuelgabriel.beta.processos.api.services.exceptions.*;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -22,11 +20,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.emanuelgabriel.beta.processos.api.exceptionhandler.Problema.Campo;
-import br.com.emanuelgabriel.beta.processos.api.services.exceptions.ProcessoNaoEncontradoException;
-import br.com.emanuelgabriel.beta.processos.api.services.exceptions.RegraNegocioException;
-import br.com.emanuelgabriel.beta.processos.api.services.exceptions.TipoContatoNaoEncontradoException;
-import br.com.emanuelgabriel.beta.processos.api.services.exceptions.TipoSolicitacaoNaoEncontradoException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -80,6 +76,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(ProcessoNaoEncontradoException.class)
 	public ResponseEntity<?> processoNaoEncontradoException(ProcessoNaoEncontradoException ex, WebRequest request) {
+
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
+		String detalhe = ex.getMessage();
+
+		ProblemaResponse problema = criarProblemaBuilder(status, tipoProblema, detalhe).mensagem(detalhe).build();
+
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+	}
+
+	@ExceptionHandler(ClienteNaoEncontradoException.class)
+	public ResponseEntity<?> clienteNaoEncontradoException(ClienteNaoEncontradoException ex, WebRequest request) {
 
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		TipoProblema tipoProblema = TipoProblema.RECURSO_NAO_ENCONTRADO;
