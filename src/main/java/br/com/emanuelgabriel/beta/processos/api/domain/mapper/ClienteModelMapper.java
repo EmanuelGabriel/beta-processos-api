@@ -52,11 +52,11 @@ public class ClienteModelMapper {
 
 
     /**
-     * @param categorias
+     * @param clientes
      * @return List<Cliente>
      */
-    public List<Cliente> listDtoToEntity(List<ClienteResponseDTO> categorias) {
-        return categorias.stream().map(this::dtoToEntity).collect(Collectors.toList());
+    public List<Cliente> listDtoToEntity(List<ClienteResponseDTO> clientes) {
+        return clientes.stream().map(this::dtoToEntity).collect(Collectors.toList());
     }
 
     /**
